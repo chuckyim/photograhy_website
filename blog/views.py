@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Blog
+from .models import Blog, BlogImage
 
 def allblogs(request):
     blogs = Blog.objects
@@ -7,4 +7,8 @@ def allblogs(request):
 
 def detail(request, blog_key):
     detailblog = get_object_or_404(Blog, blog_key=blog_key)
-    return render(request, 'blog/detail.html', {'blog':detailblog})
+    images = BlogImage.objects.filter(blog=detailblog)
+    return render(request, 'blog/detail.html', {
+        'blog':detailblog,
+        'images':images   
+        })

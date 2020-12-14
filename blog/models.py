@@ -4,7 +4,6 @@ class Blog(models.Model):
     title = models.CharField(max_length=255)
     pub_date = models.DateTimeField()
     body = models.TextField()
-    image = models.ImageField(upload_to='images/')
     blog_key = models.IntegerField(default=999)
 
     def __str__(self):
@@ -15,3 +14,10 @@ class Blog(models.Model):
 
     def pub_date_pretty(self):
         return self.pub_date.strftime('%b %e %Y')
+
+class BlogImage(models.Model):
+    blog = models.ForeignKey(Blog, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.blog.title     
