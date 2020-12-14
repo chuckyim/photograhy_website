@@ -3,6 +3,7 @@ from django.db import models
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     pub_date = models.DateTimeField()
+    image = models.ImageField(upload_to='images/', null=True)
     body = models.TextField()
     blog_key = models.IntegerField(default=999)
 
